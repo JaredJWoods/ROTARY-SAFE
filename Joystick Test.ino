@@ -3,7 +3,8 @@
 //sets pinout
 const int VRx = A0;
 const int VRy = A1;
-#define SW 2
+#define joystickVCC 21
+#define SW 7
 #define LED 4
 #define redButton 
 #define delayResponse 2
@@ -23,11 +24,13 @@ void setup(){
   Serial.begin(9600);
   
   pinMode(SW, INPUT_PULLUP);
+  pinMode(joystickVCC, OUTPUT);
   pinMode(LED, OUTPUT);
   initialize();
   }
 void initialize(){                            //maybe this can be used as an interrupt later to "recalibrate"
-  int i = 0;
+  digitalWrite(joystickVCC, HIGH);
+    int i = 0;
   while(i<5){                                //flashes a light 5 times
     digitalWrite(LED, HIGH);
     delay(100);
